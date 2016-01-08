@@ -1,0 +1,98 @@
+﻿@using Phobos.Helpers
+
+@model IEnumerable<Phobos.Models.Jobs.Entities.JobPosting>
+
+@{
+    ViewBag.AccountType = "Job Seeker";
+}
+
+@section styles{
+    @Styles.Render("~/bundles/employers-styles")
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/employers-scripts")
+}
+                      <!-- jQuery -->
+
+                      <script type="text/javascript" String charset="utf8"  src="//code.jquery.com/jquery-1.10.2.min.js" ></script>
+
+
+
+                      <!-- DataTables -->
+
+                      <script type="text/javascript" String charset="utf8"  src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.js" ></script>       
+                      
+                      <script>
+$(document).ready(function() {
+
+    $('#jobposting').DataTable();
+
+                      } );</script> 
+<div class="static-banner">
+    <h1 class="banner-title text-center">Job Boards</h1>
+</div>
+
+@{Html.RenderPartial("_BannerSearch");}
+
+<div class="container content" >
+    <h1 class="Dark-Blue text-left">Job Boards</h1>
+    
+    <hr />
+
+    <div class="row">
+       
+        <div class="col-sm-12">
+            <h5>MOST RECENT POSTS</h5>
+            <table id="jobposting" class="display">
+                
+                    <thead>
+                        <tr class="Black">
+                            <th>Location</th>
+                            <th>Job Title</th>
+                            <th>Company</th>
+                            <th>Pay</th>
+                            <th>Expires</th>
+                        </tr>
+                        </thead> 
+                <tbody>
+                    @foreach (var job in Model)
+                    {
+                        <tr>
+                            <td><p class="p-c">@PhobosHelper.GetEnumDescription((Phobos.Models.Jobs.Enums.JobLocation)job.JobLocation)</p></td>
+                            <td>@Html.ActionLink(job.Title, "job", new { id = job.ID }, new { @class = "p-c" })</td>
+                            <td><p class="p-c">@job.Company</p></td>
+                            <td><p class="p-c">@job.Compensation</p></td>
+                            <td><p class="p-c">@job.ExpirationDate.ToShortDateString()</p></td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+
+            @*            <br />
+            <div id="job-pagination">
+                <div id="next" class="pull-right"><a href="#">Next</a></div>
+                <div class="page pull-right"><a href="#job-board-table">10</a></div>
+                <div class="page pull-right"><a href="#job-board-table">9</a></div>
+                <div class="page pull-right"><a href="#job-board-table">8</a></div>
+                <div class="page pull-right"><a href="#job-board-table">7</a></div>
+                <div class="page pull-right"><a href="#job-board-table">6</a></div>
+                <div class="page pull-right"><a href="#job-board-table">5</a></div>
+                <div class="page pull-right"><a href="#job-board-table">4</a></div>
+                <div class="page pull-right"><a href="#job-board-table">3</a></div>
+                <div class="page pull-right"><a href="#job-board-table">2</a></div>
+                <div class="page pull-right"><a href="#job-board-table">1</a></div>
+                <div id="previous" class="pull-right">Previous</div>
+            </div>
+            *@
+
+            <br /> <br /> <br /> <br />
+            <div><img src="http://placehold.it/742X150" class="img-responsive" /></div>
+        </div>
+    </div>
+
+
+
+
+</div>
